@@ -1,0 +1,20 @@
+创建user表
+php artisan make:migration create_table_users --create=users
+
+php artisan migrate --pretend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into users (`username`, `password`) values ('韩梅梅', '123456');
