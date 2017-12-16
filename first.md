@@ -2,16 +2,15 @@
 首先要安装composer；
 如果不会安装的参考 composer的初级使用;
 然后点击下面的链接下载项目；
-github: https://github.com/baijunyao/laravel-bjyblog
-giee(国内速度快): https://gitee.com/shuaibai123/laravel-bjyblog
+github: https://github.com/youxianyen/laravelangular.git
 
 或者使用git clone；
 github:
 
-git clone git@github.com:baijunyao/laravel-bjyblog.git
+git clone git@github.com:youxianyen/laravelangular.git
 gitee(国内速度快):
 
-git clone git@gitee.com:shuaibai123/laravel-bjyblog.git
+git clone git@gitee.com:youxianyen/laravelangular.git
 配置好本地环境主要是指向public目录；
 参考 phpstudy 配置虚拟主机;
 
