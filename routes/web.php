@@ -24,6 +24,11 @@ function user_ins()
 	return new App\User;
 }
 
+function comment_ins()
+{
+	return new App\Comment;
+}
+
 function question_ins()
 {
 	return new App\Question;
@@ -87,11 +92,20 @@ Route::any('api/answer/change', function(){
     return answer_ins()->change();
 });
 
+//
+Route::any('api/answer/remove', function(){
+    return answer_ins()->remove();
+});
+
 //查看回答问题api
 Route::any('api/answer/read', function(){
     return answer_ins()->read();
 });
 
+//添加评论api
+Route::any('api/comment/add', function(){
+    return comment_ins()->add();
+});
 
 Route::any('test', function(){
     dd(user_ins()->is_logged_in());
