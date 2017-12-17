@@ -14,7 +14,46 @@ php artisan migrate --pretend
 
 
 
-
-
-
+show tables;
+drop table users;
+desc migrations;
+select * from migrations;
+select * from questions;
+select * from questions where id=2;
+desc table_1;
+desc questions;
+desc users;
+show tables;
 insert into users (`username`, `password`) values ('韩梅梅', '123456');
+
+
+
+
+5-1
+Question Migration的建立
+php artisan make:migration create_table_questions --create=questions
+
+创建questions表
+php artisan migrate
+
+
+INSERT INTO users (`username`, `password`) values('李磊', '12341234');
+
+
+php artisan make:model Question
+insert into questions (`title`, `desc`) values ('地球为什么是方的？', '地球好大好大,地球是圆的');
+
+
+6-1回答问题api的实现
+php artisan make:migration create_table_answers --create=answers
+php artisan migrate --pretend
+php artisan migrate:rollback
+
+新建answer model
+php artisan make:model Answer
+
+
+
+
+
+
