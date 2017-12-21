@@ -87,3 +87,7 @@ php artisan make:migration add_field_phone_captcha --table=users
 
 
 
+cd到public目录
+安装angular jquery angular-ui-router normalize-css
+npm install angular jquery angular-ui-router normalize-css
+
