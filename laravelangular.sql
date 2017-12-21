@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-12-17 14:50:06
+-- Generation Time: 2017-12-21 06:27:03
 -- 服务器版本： 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -42,8 +42,56 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES
-(1, '\'地球是反反复复付付付付付付付\'', 1, 1, NULL, '2017-12-17 07:31:58'),
-(2, '地球为什么是方的？', 2, 1, '2017-12-17 12:51:25', '2017-12-17 12:51:25');
+(1, '天天向上', 2, 2, '2017-12-20 04:15:39', '2017-12-20 04:15:39'),
+(2, 'daydayup', 2, 1, '2017-12-20 04:15:58', '2017-12-20 04:15:58');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `answer_user`
+--
+
+CREATE TABLE `answer_user` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `answer_id` int(10) UNSIGNED NOT NULL,
+  `vote` smallint(5) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 转存表中的数据 `answer_user`
+--
+
+INSERT INTO `answer_user` (`id`, `user_id`, `answer_id`, `vote`, `created_at`, `updated_at`) VALUES
+(3, 1, 2, 1, '2017-12-20 06:16:01', '2017-12-20 06:16:01');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `question_id` int(10) UNSIGNED DEFAULT NULL,
+  `answer_id` int(10) UNSIGNED DEFAULT NULL,
+  `reply_to` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 转存表中的数据 `comments`
+--
+
+INSERT INTO `comments` (`id`, `content`, `user_id`, `question_id`, `answer_id`, `reply_to`, `created_at`, `updated_at`) VALUES
+(1, '不明觉厉', 1, NULL, 1, NULL, '2017-12-20 04:24:03', '2017-12-20 04:24:03'),
+(2, '好随意', 1, NULL, 1, NULL, '2017-12-20 04:24:23', '2017-12-20 04:24:23'),
+(3, '好人有好报', 1, NULL, 2, NULL, '2017-12-20 04:24:30', '2017-12-20 04:24:30');
 
 -- --------------------------------------------------------
 
@@ -62,10 +110,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2017_12_15_031523_create_table_table1', 1),
-(4, '2017_12_15_065633_create_table_users', 2),
-(5, '2017_12_16_113115_create_table_questions', 2),
-(6, '2017_12_17_112950_create_table_answers', 2);
+(1, '2017_12_15_065633_create_table_users', 1),
+(2, '2017_12_16_113115_create_table_questions', 1),
+(3, '2017_12_17_112950_create_table_answers', 1),
+(4, '2017_12_18_095005_create_table_comments', 1),
+(5, '2017_12_19_102054_create_table_answer_user', 1),
+(6, '2017_12_20_151620_add_field_phone_captcha', 2);
 
 -- --------------------------------------------------------
 
@@ -88,20 +138,10 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `title`, `desc`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, '地球为什么是方的？', '地球为什么是方的？', 1, 'ok', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `table_1`
---
-
-CREATE TABLE `table_1` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `article` text COLLATE utf8mb4_unicode_ci,
-  `username` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, '大家好才是真的好', NULL, 2, 'ok', '2017-12-20 04:14:29', '2017-12-20 04:14:29'),
+(2, '不明觉厉', NULL, 2, 'ok', '2017-12-20 04:15:03', '2017-12-20 04:15:03'),
+(3, '阿斯顿电饭锅', NULL, 1, 'ok', '2017-12-20 04:22:17', '2017-12-20 04:22:17'),
+(4, '面对法律的', NULL, 1, 'ok', '2017-12-20 04:22:30', '2017-12-20 04:22:30');
 
 -- --------------------------------------------------------
 
@@ -118,16 +158,17 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `intro` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `phone_captcha` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 转存表中的数据 `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `avatar_url`, `phone`, `password`, `intro`, `created_at`, `updated_at`) VALUES
-(1, '韩梅梅', NULL, NULL, NULL, '$2y$10$dE85PgtJiZrwg.y.rw/jh..FugvhN4o1PKz7AJuyFx7L7sUpaGNpa', NULL, NULL, NULL),
-(2, 'lili', NULL, NULL, NULL, '$2y$10$Eee3xzhlQhnKfoCQMiKn7uJF5gMHECnHSYbiu7.nc7DnrqTuPYUvS', NULL, '2017-12-17 12:48:33', '2017-12-17 12:48:33');
+INSERT INTO `users` (`id`, `username`, `email`, `avatar_url`, `phone`, `password`, `intro`, `created_at`, `updated_at`, `phone_captcha`) VALUES
+(1, '韩梅梅', NULL, NULL, '1234', '$2y$10$dE85PgtJiZrwg.y.rw/jh..FugvhN4o1PKz7AJuyFx7L7sUpaGNpa', NULL, NULL, '2017-12-21 03:21:52', '1651'),
+(2, 'lili', NULL, NULL, '13345678806', '$2y$10$0ukhOKoSOhCIzf/MLCFrnuuMHar4W85p.x52tfJWHwwZEvVZ2Nhau', NULL, '2017-12-17 04:48:33', '2017-12-20 09:14:10', '1196');
 
 --
 -- Indexes for dumped tables
@@ -142,6 +183,24 @@ ALTER TABLE `answers`
   ADD KEY `answers_question_id_foreign` (`question_id`);
 
 --
+-- Indexes for table `answer_user`
+--
+ALTER TABLE `answer_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `answer_user_user_id_answer_id_vote_unique` (`user_id`,`answer_id`,`vote`),
+  ADD KEY `answer_user_answer_id_foreign` (`answer_id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_user_id_foreign` (`user_id`),
+  ADD KEY `comments_question_id_foreign` (`question_id`),
+  ADD KEY `comments_answer_id_foreign` (`answer_id`),
+  ADD KEY `comments_reply_to_foreign` (`reply_to`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -153,13 +212,6 @@ ALTER TABLE `migrations`
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `questions_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `table_1`
---
-ALTER TABLE `table_1`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `table1_username_unique` (`username`);
 
 --
 -- Indexes for table `users`
@@ -181,6 +233,18 @@ ALTER TABLE `answers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- 使用表AUTO_INCREMENT `answer_user`
+--
+ALTER TABLE `answer_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- 使用表AUTO_INCREMENT `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- 使用表AUTO_INCREMENT `migrations`
 --
 ALTER TABLE `migrations`
@@ -190,13 +254,7 @@ ALTER TABLE `migrations`
 -- 使用表AUTO_INCREMENT `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `table_1`
---
-ALTER TABLE `table_1`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用表AUTO_INCREMENT `users`
@@ -214,6 +272,22 @@ ALTER TABLE `users`
 ALTER TABLE `answers`
   ADD CONSTRAINT `answers_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`),
   ADD CONSTRAINT `answers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- 限制表 `answer_user`
+--
+ALTER TABLE `answer_user`
+  ADD CONSTRAINT `answer_user_answer_id_foreign` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`),
+  ADD CONSTRAINT `answer_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- 限制表 `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_answer_id_foreign` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`),
+  ADD CONSTRAINT `comments_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`),
+  ADD CONSTRAINT `comments_reply_to_foreign` FOREIGN KEY (`reply_to`) REFERENCES `comments` (`id`),
+  ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- 限制表 `questions`
