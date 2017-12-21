@@ -30,3 +30,12 @@ php artisan migrate
 运行数据填充命令;
 
 php artisan db:seed
+
+
+
+
+8-6视频
+检查机器人
+user.php
+public function is_robot($time = 10)
+10秒间隔未做好。

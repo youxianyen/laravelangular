@@ -57,3 +57,33 @@ php artisan make:model Answer
 
 
 
+
+7-1评论API的实现
+php artisan make:migration create_table_comments --create=comments
+php artisan migrate --pretend
+
+新建comment model
+php artisan make:model Comment
+php artisan migrate
+
+
+
+
+
+8-1通用API的实现
+php artisan make:migration create_table_answer_user --create=answer_user
+php artisan migrate --pretend
+php artisan migrate
+
+
+
+
+给user表加字段
+php artisan make:migration add_field_phone_captcha --table=users
+
+
+
+
+
+
+

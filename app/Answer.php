@@ -15,8 +15,7 @@ class Answer extends Model
     	{
     		return ['status' => 0, 'msg' => 'login required'];
     	}
-
-
+        
     	//2.检查是否存在question_id 和content
     	if (!rq('question_id') || !rq('content')) 
     	{
@@ -119,5 +118,84 @@ class Answer extends Model
         return ['status' => 1, 'data' => $answers];
 
     }
+
+    //删除回答api
+    public function remove()
+    {
+        //1.检查用户是否登录
+        if(!user_ins()->is_logged_in())
+        {
+            return ['status' => 0, 'msg' => 'login required'];
+        }
+        
+        if(!rq('id'))
+        {
+            return ['status' => 0, 'msg' => 'id is required'];
+        }
+
+        $answer = $this->find(rq('id'));
+        if(!$answer)
+        {
+            return ['status' => 0, 'msg' => 'answer not exists'];
+        }
+
+        if($answer->user_id != session('user_id'))
+        {
+            return ['status' => 0, 'msg' => 'permission denied'];
+        }
+
+        return $answer->delete() ? 
+        ['status' => 1, 'msg' => 'delete success'] : 
+        ['status' => 0, 'msg' => 'db delete failed'];
+    }
+
+    //投票API
+    public function vote()
+    {
+
+        //1.检查用户是否登录
+        if(!user_ins()->is_logged_in())
+        {
+            return ['status' => 0, 'msg' => 'login required'];
+        }
+
+        if(!rq('id') || !rq('vote'))
+        {
+            return ['status' => 0, 'msg' => 'id and vote are required'];
+        }
+
+        $answer = $this->find(rq('id'));
+        
+        if (!$answer) 
+        {
+            return ['status' => 0, 'msg' => 'answer not exists'];
+        }
+
+        //1.赞成 2.反对
+        $vote = rq('vote') <= 1 ? 1 : 2;
+
+        //检查此用户是否在相同问题下投过票,如果投过票就删除投票
+        $answer->users()
+        ->newPivotStatement()
+        ->where('user_id', session('user_id'))
+        ->where('answer_id', rq('id'))
+        ->delete();
+
+        //在连接表中增加数据  
+        $answer
+        ->users()
+        ->attach(session('user_id'), ['vote' => $vote]);
+        
+        return ['status' => 1, 'msg' => 'success'];
+    }
+
+    public function users()
+    {
+        return $this
+        ->belongsToMany('App\User')
+        ->withPivot('vote')
+        ->withTimestamps();   
+    }
 }
+
 

@@ -39,6 +39,26 @@ function answer_ins()
 	return new App\Answer;
 }
 
+function paginate($page = 1, $limit = 16)
+{
+    $limit = $limit ?: 16;
+    $skip = ($page ? $page - 1 : 0) * $limit;
+    return [$limit, $skip];
+}
+
+function err($msg = null)
+{
+    return ['status' => 0, 'msg' => $msg];
+}
+
+function suc($data_to_merge = null)
+{
+    $data = ['status' => 1];
+    if ($data_to_merge)    
+        $data = array_merge($data, $data_to_merge);    
+    return $data;
+}
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -47,8 +67,23 @@ Route::any('api', function(){
 });
 
 Route::any('api/user', function(){
-    $user = new App\User;
-    return $user->signup();
+    
+    return user_ins()->signup();
+});
+
+Route::any('api/user/change_password', function(){
+    
+    return user_ins()->change_password();
+});
+
+Route::any('api/user/reset_password', function(){
+    
+    return user_ins()->reset_password();
+});
+
+Route::any('api/user/validate_reset_password', function(){
+    
+    return user_ins()->validate_reset_password();
 });
 
 /*Route::any('api/user', function(){
@@ -97,6 +132,11 @@ Route::any('api/answer/remove', function(){
     return answer_ins()->remove();
 });
 
+//
+Route::any('api/answer/vote', function(){
+    return answer_ins()->vote();
+});
+
 //查看回答问题api
 Route::any('api/answer/read', function(){
     return answer_ins()->read();
@@ -106,6 +146,18 @@ Route::any('api/answer/read', function(){
 Route::any('api/comment/add', function(){
     return comment_ins()->add();
 });
+
+//查看评论api
+Route::any('api/comment/read', function(){
+    return comment_ins()->read();
+});
+
+//删除评论api
+Route::any('api/comment/remove', function(){
+    return comment_ins()->remove();
+});
+
+
 
 Route::any('test', function(){
     dd(user_ins()->is_logged_in());
