@@ -38,4 +38,45 @@ php artisan db:seed
 检查机器人
 user.php
 public function is_robot($time = 10)
-10秒间隔未做好。
+10秒间隔机器人检测未做好。
+
+
+
+
+
+
+
+
+
+#晓乎后端API文档v1.0.0
+##常规API调用原则
+-所有API都以`domain.com/api/...`开头
+-API分为两个部分，如`domain.com/api/part1/part2`
+ -`part_1`为model名称，如`user`或`question`
+ -`part_2`为行为名称，如`reset_password`
+ 
+-CURD
+ -每个model都会有增删改查四个方法，分别对应为`add`,`remove`,`change`,`read`
+
+ ##Model
+ ###Question
+ ####字段解释
+  -id
+  -必填：`title`(标题)
+  -可选：`desc`（描述）
+ ####add
+ -权限：已登录
+ -传参：
+  -必填：`title`(标题)
+  -可选：`desc`（描述）
+  ###change
+ -权限：已登录且为问题的所有者
+ -传参：
+  -必填：`id` (问题id）
+  -可选：`title`，`desc`
+  
+ 
+api设计
+命名清晰、准确
+第三方API最好有版本号
+活学活用

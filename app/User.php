@@ -59,6 +59,26 @@ class User extends Model
         
     }
 
+    /*获取用户信息API*/
+    public function read()
+    {
+        if (!rq('id')) 
+        {
+            return err('required id');
+        }
+
+        $get = ['id', 'username', 'avatar_url', 'intro'];
+            //$this->get($get);
+        $user = $this->find(rq('id'), $get);
+        $data = $user->toArray();
+        $answer_count = answer_ins()->where('user_id', rq('id'))->count();
+        $question_count = question_ins()->where('user_id', rq('id'))->count();
+        $data['answer_count'] = $answer_count;
+        $data['question_count'] = $question_count;
+
+        return suc($data);
+    }
+
     /*登录API*/
     public function login()
     {
@@ -163,7 +183,7 @@ class User extends Model
     {
         if ($this->is_robot())
         {
-            return err('max frenquency is reached');
+            return err('max frenquency reached');
         }
 
         if (!rq('phone'))
@@ -197,7 +217,7 @@ class User extends Model
     {
         if ($this->is_robot(2))
         {
-            return err('max frenquency is reached');
+            return err('max frenquency reached');
         }
 
         if (!rq('phone') || !rq('phone_captcha') || !rq('new_password'))
@@ -227,12 +247,12 @@ class User extends Model
     public function is_robot($time = 10)
     {
         //如果session中没有last_action_time,说明接口从未被调用过
-        if (!session('last_action_time'))
+        if (!session('last_active_time'))
             {
                 return false;
             }
         $current_time = time();
-        $last_active_time = session('last_action_time');
+        $last_active_time = session('last_active_time');
 
         $elapsed = $current_time - $last_active_time;
         //dd($elapsed);
@@ -243,7 +263,7 @@ class User extends Model
     //更新机器人行为时间
     public function update_robot_time()
     {
-        session('last_action_time', time());
+        session('last_active_time', time());
     }
 
     public function send_sms()
@@ -265,5 +285,11 @@ class User extends Model
         ->withTimestamps();
     }
 
-    
+    public function questions()
+    {
+        return $this
+        ->belongsToMany('App\Questions')
+        ->withPivot('vote')
+        ->withTimestamps();      
+    } 
 }
