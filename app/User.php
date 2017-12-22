@@ -292,4 +292,9 @@ class User extends Model
         ->withPivot('vote')
         ->withTimestamps();      
     } 
+
+    public function exists()
+    {
+        return suc(['count' => $this->where(rq())->count()]);
+    }
 }
