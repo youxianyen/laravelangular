@@ -29,7 +29,7 @@
 	})
 	
   .service('UserService', [
-    'http',
+    '$http',
     function($http){
       var me = this;
       me.signup_data = {};

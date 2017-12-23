@@ -79,7 +79,13 @@ The vote came after US Ambassador to the UN Nikki Haley issued a direct threat, 
 		<form name="signup_form" ng-submit="User.signup()">
 			<div class="input-group">
 				<label>用户名</label>
-			    <input type="text" ng-minlength="4" ng-maxlength="24" name="username" ng-model="User.signup_data.username" ng-model-option="{updateOn: 'blur'}" required="">
+			    <input type="text" 
+			    ng-minlength="4" 
+			    ng-maxlength="24" 
+			    name="username" 
+			    ng-model="User.signup_data.username" 
+			  
+			    required="">
 			    <div ng-if="signup_form.username.$touched" class="input-error-set">
 			    	<div ng-if="signup_form.username.$error.required">
 			    	用户名为必填项
@@ -91,7 +97,12 @@ The vote came after US Ambassador to the UN Nikki Haley issued a direct threat, 
 			</div>
 			<div class="input-group">
 				<label>密码</label>
-			    <input name="password" type="password" ng-minlength="6" ng-maxlength="255" ng-model="User.signup_data.password" required="">
+			    <input name="password" 
+			    type="password" 
+			    ng-minlength="6" 
+			    ng-maxlength="255" 
+			    ng-model="User.signup_data.password" 
+			    required="">
 			    <div ng-if="signup_form.password.$touched" class="input-error-set">
 			    	<div ng-if="signup_form.password.$error.required">
 			    	密码为必填项
