@@ -59,6 +59,12 @@ function suc($data_to_merge = [])
     return $data;
 }
 
+function is_logged_in()
+{
+    //检查session中有user_id就返回user_id，没有user_id就返回false
+    return session('user_id') ?: false;  //
+}
+
 Route::get('/', function () {
     return view('index');
 });
@@ -66,7 +72,8 @@ Route::any('api', function(){
     return ['version' => 0.1];
 });
 
-Route::any('api/user', function(){
+
+Route::any('api/signup', function(){
     
     return user_ins()->signup();
 });
@@ -81,9 +88,9 @@ Route::any('api/user/reset_password', function(){
     return user_ins()->reset_password();
 });
 
-Route::any('api/user/exists', function(){
+Route::any('api/user/exist', function(){
     
-    return user_ins()->exists();
+    return user_ins()->exist();
 });
 
 Route::any('api/user/validate_reset_password', function(){

@@ -293,7 +293,7 @@ class User extends Model
         ->withTimestamps();      
     } 
 
-    public function exists()
+    public function exist()
     {
         return suc(['count' => $this->where(rq())->count()]);
     }

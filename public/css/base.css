@@ -11,6 +11,8 @@ a {
 }
 body {
 	background: #eee;
+	line-height: 1.5;
+	font-size: 14px;
 }
 h1 {
 	font-size: 10px;
@@ -22,6 +24,17 @@ h1 {
 .fr {
 	float: right;
 }
+hr {
+	display: block;
+	width: 96%;
+	height: 1px;
+	background: #eee;
+	margin: 10px auto;
+}
+.content-act {
+	font-size: 14px;
+	color: #666;
+}
 .clearfix:after,
 .clearfix:before {
     content: " ";
@@ -31,6 +44,9 @@ h1 {
 .navbar {
 	background: #a10;
 	color: #fff;
+}
+.navbar form {
+    display: inline-block;
 }
 .navbar-item {
 	display: inline-block;
@@ -54,6 +70,7 @@ h1 {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 [ui-sref] {
 	cursor: pointer;
 }
@@ -75,7 +92,8 @@ label {
 	background: #fff;
 	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .1);
 }
-input {
+input, 
+textarea {
 	display: block;
 	width: 100%;
 	padding: 5px;
@@ -91,9 +109,33 @@ input {
 }
 .container.signup, 
 .container.login, 
+.container.question-add, 
 .container.reset-password {
     width: 400px;
     margin-top: 15px;
+}
+.home h1 {
+	font-size: 16px;
+	color: #666;
+}
+.content-act {
+	font-size: 14px;
+	color: #666;
+}
+.home .item-content .title 
+.home .content-owner {
+	color: #222;	
+}
+.home .content-owner {
+    font-size: 13px;
+}
+.home .content-owner .desc{
+    color: #666;
+}
+.home .item-content .title {
+	font-size: 700;
+	color: #222;
+	font-size: 16px;
 }
 button {
 	1px sold rgba(0, 0, 0, 0.1);
@@ -101,9 +143,22 @@ button {
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	background: #fff;
-}
-input, button {
 	padding: 5px;
 }
-
+input, button {
+	padding: 6px;
+}
+button.primary, 
+#quick_ask button{
+	color: #fff;
+	background: #a10; 
+	border: 1px solid rgba(0, 0, 0, .2)
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+}
+button[disable] {
+	background: #eee;
+	color: #aaa;
+}
 
