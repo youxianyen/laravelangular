@@ -156,4 +156,29 @@
     function($scope, QuestionService){
       $scope.Question = QuestionService;
   }])
+
+  .service('TimelineService', [
+    '$http', 
+    function($http)
+    {
+      var me = this;
+      me.get = function(conf)
+      {
+        $http.post('api/timeline', conf)
+          .then(function (){
+            if (r.data.status)
+            {
+              me.data = r.data.data;
+            }
+          }, function (){
+
+          })
+      }
+    }])
+
+  .controller('HomeController', [
+    '$scope',
+    function($scope){
+    console.log(1);
+    }])
 })();

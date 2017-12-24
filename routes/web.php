@@ -174,6 +174,8 @@ Route::any('api/comment/remove', function(){
     return comment_ins()->remove();
 });
 
+//删除评论api
+Route::any('api/timeline', 'CommonController@timeline');
 
 
 Route::any('test', function(){

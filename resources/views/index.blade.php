@@ -44,13 +44,13 @@
 </body>
 <!-- .page .home -->
 <script type="text/ng-template" id="home.tpl">
-<div class="home card container">	
+<div ng-controller="HomeController" class="home card container">	
 	<h1>最近动态</h1>
 	<div class="hr"></div>
 	<div class="item-set">
 		<div class="item">
 			<div class="vote"></div>
-			<div class="item-content">
+			<div class="feed-item-content">
 				<div class="content-act">猪八戒赞同了该回答</div>
 				<div class="title">哪个瞬间让你觉得读书很有用？</div>
 				<div class="content-owner">子墨子</div>
@@ -63,8 +63,32 @@ But researchers say those percentages of young children who believe in jolly old
 				<div class="action-set">
 					<div class="comment">评论</div>
 				</div>
+				<div class="comment-block">
+					<div class="hr"></div>
+                    <div class="comment-item-set">
+                    	<div class="rect"></div>
+                    	<div class="comment-item clearfix">
+                            <div class="user">李明</div>
+                            <div class="comment-content">But researchers say those percentages of young children who believe in jolly old Saint Nick seem to have remained steady over the years.
+                            </div>
+                    	</div>
+                    	<div class="comment-item clearfix">
+                            <div class="user">李明</div>
+                            <div class="comment-content">But researchers say those percentages of young children who believe in jolly old Saint Nick seem to have remained steady over the years.
+                            </div>
+                    	</div>
+                    	<div class="comment-item clearfix">
+                            <div class="user">李明</div>
+                            <div class="comment-content">But researchers say those percentages of young children who believe in jolly old Saint Nick seem to have remained steady over the years.
+                            </div>
+                    	</div>
+                    </div>
+				</div>
 			</div>			
 		</div>
+		<div class="hr"></div>
+
+
 	</div>
 </div>	
 

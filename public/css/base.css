@@ -12,7 +12,7 @@ a {
 body {
 	background: #eee;
 	line-height: 1.5;
-	font-size: 14px;
+	font-size: 13px;
 }
 h1 {
 	font-size: 10px;
@@ -24,11 +24,11 @@ h1 {
 .fr {
 	float: right;
 }
-hr {
+.hr {
 	display: block;
-	width: 96%;
+	width: 98%;
 	height: 1px;
-	background: #eee;
+	background: rgba(0, 0, 0, 0.08);
 	margin: 10px auto;
 }
 .content-act {
@@ -65,12 +65,6 @@ hr {
     line-height: 1;
     font-weight: 600;
 }
-.container {
-	width: 600px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
 [ui-sref] {
 	cursor: pointer;
 }
@@ -80,6 +74,32 @@ label {
 }
 label {
 	margin: 4px 0;
+}
+.comment-item-set {
+/*	border: 1px solid #eee;*/
+    padding: 0 10px;
+}
+.comment-item-set .rect {
+	position: relative;
+	bottom: 17px;
+	right: 2px;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid rgba(0, 0, 0, .08);
+}
+.comment-item {
+
+}
+.comment-item .user {
+	float: left;
+	width: 10%;	
+	font-weight: 500;
+}
+.comment-item .comment-content {
+	float: right;
+	width: 90%;	
 }
 .input-error-set {
 	color: #a10;
@@ -107,6 +127,14 @@ textarea {
 .input-group {
 	margin-bottom: 10px;
 }
+.container {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.container .home{
+	width: 500px;
+}
 .container.signup, 
 .container.login, 
 .container.question-add, 
@@ -116,26 +144,39 @@ textarea {
 }
 .home h1 {
 	font-size: 16px;
-	color: #666;
 }
-.content-act {
-	font-size: 14px;
-	color: #666;
+.feed-item-content .content-act {
+	font-size: 12px;
 }
-.home .item-content .title 
-.home .content-owner {
+.feed-item-content .title 
+.feed-item-content .content-owner {
 	color: #222;	
 }
-.home .content-owner {
+.feed-item-content .content-owner {
     font-size: 13px;
 }
-.home .content-owner .desc{
+.feed-item-content .content-main {
+    font-size: 14px;
+}
+.home h1, 
+.feed-item-content .content-act, 
+.feed-item-content .content-owner .desc {
     color: #666;
 }
-.home .item-content .title {
+.feed-item-content .action-set {
+    color: #777;
+}
+.feed-item-content .content-owner .desc, 
+.feed-item-content .action-set {
+    font-size: 12px;
+}
+.comment-block {
+	display: none;
+}
+.home .feed-item-content .title {
 	font-size: 700;
 	color: #222;
-	font-size: 16px;
+	font-size: 14px;
 }
 button {
 	1px sold rgba(0, 0, 0, 0.1);
