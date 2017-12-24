@@ -162,6 +162,7 @@
     function($http)
     {
       var me = this;
+      me.data = [];
       me.get = function(conf)
       {
         $http.post('api/timeline', conf)
@@ -169,6 +170,10 @@
             if (r.data.status)
             {
               me.data = r.data.data;
+            }
+            else 
+            {
+              console.log('network error');
             }
           }, function (){
 
