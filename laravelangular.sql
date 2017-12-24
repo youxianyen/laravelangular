@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-12-21 06:27:03
+-- Generation Time: 2017-12-24 16:52:12
 -- 服务器版本： 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -42,8 +42,10 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES
-(1, '天天向上', 2, 2, '2017-12-20 04:15:39', '2017-12-20 04:15:39'),
-(2, 'daydayup', 2, 1, '2017-12-20 04:15:58', '2017-12-20 04:15:58');
+(1, '恩恩，地球就是圆的，有缘千里来相聚', 2, 1, '2017-12-24 04:24:55', '2017-12-24 04:24:55'),
+(2, '恩恩，肯定有外星人！！！不信你看', 2, 2, '2017-12-24 04:25:33', '2017-12-24 04:25:33'),
+(5, '地球真的好大，地球是圆的哦', 1, 1, '2017-12-24 04:35:37', '2017-12-24 04:35:37'),
+(6, '宇宙真的有外星人，看', 1, 2, '2017-12-24 04:35:59', '2017-12-24 04:35:59');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,8 @@ CREATE TABLE `answer_user` (
 --
 
 INSERT INTO `answer_user` (`id`, `user_id`, `answer_id`, `vote`, `created_at`, `updated_at`) VALUES
-(3, 1, 2, 1, '2017-12-20 06:16:01', '2017-12-20 06:16:01');
+(1, 1, 1, 1, '2017-12-24 04:37:08', '2017-12-24 04:37:08'),
+(2, 1, 2, 1, '2017-12-24 04:37:17', '2017-12-24 04:37:17');
 
 -- --------------------------------------------------------
 
@@ -89,9 +92,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `content`, `user_id`, `question_id`, `answer_id`, `reply_to`, `created_at`, `updated_at`) VALUES
-(1, '不明觉厉', 1, NULL, 1, NULL, '2017-12-20 04:24:03', '2017-12-20 04:24:03'),
-(2, '好随意', 1, NULL, 1, NULL, '2017-12-20 04:24:23', '2017-12-20 04:24:23'),
-(3, '好人有好报', 1, NULL, 2, NULL, '2017-12-20 04:24:30', '2017-12-20 04:24:30');
+(1, '哈哈哈哈', 1, 1, NULL, NULL, '2017-12-24 04:38:47', '2017-12-24 04:38:47'),
+(2, '对的，赞成', 1, 2, NULL, NULL, '2017-12-24 04:39:14', '2017-12-24 04:39:14');
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2017_12_17_112950_create_table_answers', 1),
 (4, '2017_12_18_095005_create_table_comments', 1),
 (5, '2017_12_19_102054_create_table_answer_user', 1),
-(6, '2017_12_20_151620_add_field_phone_captcha', 2);
+(6, '2017_12_20_151620_add_field_phone_captcha', 1);
 
 -- --------------------------------------------------------
 
@@ -138,10 +140,16 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `title`, `desc`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, '大家好才是真的好', NULL, 2, 'ok', '2017-12-20 04:14:29', '2017-12-20 04:14:29'),
-(2, '不明觉厉', NULL, 2, 'ok', '2017-12-20 04:15:03', '2017-12-20 04:15:03'),
-(3, '阿斯顿电饭锅', NULL, 1, 'ok', '2017-12-20 04:22:17', '2017-12-20 04:22:17'),
-(4, '面对法律的', NULL, 1, 'ok', '2017-12-20 04:22:30', '2017-12-20 04:22:30');
+(1, '为什么地球是圆的？', NULL, 1, 'ok', '2017-12-24 04:19:28', '2017-12-24 04:19:28'),
+(2, '宇宙有外星人吗？', '外星人', 1, 'ok', '2017-12-24 04:20:21', '2017-12-24 04:20:21'),
+(3, '王尼玛今天大婚', '恭喜恭喜', 2, 'ok', '2017-12-24 04:21:56', '2017-12-24 04:21:56'),
+(4, '牙擦苏是什么鬼', '做人第一！！！！', 2, 'ok', '2017-12-24 04:22:22', '2017-12-24 04:22:22'),
+(5, 'wannim6', '什么鬼', 1, 'ok', '2017-12-24 04:40:18', '2017-12-24 04:40:18'),
+(8, '地方大幅度', '发放到沙发', 1, 'ok', '2017-12-24 04:52:21', '2017-12-24 04:52:21'),
+(9, '猫猫发发发', '范德萨发啥的分段润肺', 1, 'ok', '2017-12-24 04:53:43', '2017-12-24 04:53:43'),
+(10, '地方发发发', '发', 1, 'ok', '2017-12-24 04:59:32', '2017-12-24 04:59:32'),
+(11, '房东发发发', '丰富的', 1, 'ok', '2017-12-24 05:02:02', '2017-12-24 05:02:02'),
+(12, '15404', 'sdcccgff', 1, 'ok', '2017-12-24 13:21:45', '2017-12-24 13:21:45');
 
 -- --------------------------------------------------------
 
@@ -159,7 +167,7 @@ CREATE TABLE `users` (
   `intro` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `phone_captcha` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+  `phone_captcha` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -167,8 +175,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `avatar_url`, `phone`, `password`, `intro`, `created_at`, `updated_at`, `phone_captcha`) VALUES
-(1, '韩梅梅', NULL, NULL, '1234', '$2y$10$dE85PgtJiZrwg.y.rw/jh..FugvhN4o1PKz7AJuyFx7L7sUpaGNpa', NULL, NULL, '2017-12-21 03:21:52', '1651'),
-(2, 'lili', NULL, NULL, '13345678806', '$2y$10$0ukhOKoSOhCIzf/MLCFrnuuMHar4W85p.x52tfJWHwwZEvVZ2Nhau', NULL, '2017-12-17 04:48:33', '2017-12-20 09:14:10', '1196');
+(1, 'lili', NULL, NULL, NULL, '$2y$10$NLUk2Z/9.uENlPOVO9Cq/O3zxRGcRN1s0AeCqdc4k2bxgVLlla4SC', NULL, '2017-12-24 04:16:24', '2017-12-24 04:16:24', NULL),
+(2, 'lilei', NULL, NULL, NULL, '$2y$10$d9gXabdGuy3ItuXrEjJfruaMAIBDYN0d8ITsql3tkudpSrBxloC2i', NULL, '2017-12-24 04:17:29', '2017-12-24 04:17:29', NULL);
 
 --
 -- Indexes for dumped tables
@@ -230,19 +238,19 @@ ALTER TABLE `users`
 -- 使用表AUTO_INCREMENT `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用表AUTO_INCREMENT `answer_user`
 --
 ALTER TABLE `answer_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `migrations`
@@ -254,7 +262,7 @@ ALTER TABLE `migrations`
 -- 使用表AUTO_INCREMENT `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- 使用表AUTO_INCREMENT `users`
