@@ -182,3 +182,11 @@ Route::any('test', function(){
     dd(user_ins()->is_logged_in());
 });
 
+Route::any('phpinfo', function(){
+    user_ins()->phpinfo();
+});
+
+
+Route::any('cal', function(){
+    user_ins()->cal();
+});

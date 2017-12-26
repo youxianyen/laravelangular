@@ -189,6 +189,13 @@ class Answer extends Model
         return ['status' => 1, 'msg' => 'success'];
     }
 
+    public function user()
+    {
+        return $this
+        ->belongsToMany('App\User');
+        
+    }
+
     public function users()
     {
         return $this

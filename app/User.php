@@ -297,4 +297,20 @@ class User extends Model
     {
         return suc(['count' => $this->where(rq())->count()]);
     }
+
+    public function phpinfo()
+    {
+        phpinfo();
+    }
+
+    public function cal()
+    {
+       
+        for ($i=65; $i < 70; $i++) { 
+            $ch = chr($i);
+            echo ($ch);
+        }
+        
+        
+    }
 }

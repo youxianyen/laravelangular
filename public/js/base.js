@@ -169,21 +169,23 @@
           .then(function (){
             if (r.data.status)
             {
-              me.data = r.data.data;
+              me.data = me.data.concat(r.data.data);
             }
             else 
             {
               console.log('network error');
             }
           }, function (){
-
+            console.log('network error');
           })
       }
     }])
 
   .controller('HomeController', [
     '$scope',
-    function($scope){
-    console.log(1);
+    'TimelineService'
+    function($scope, TimelineService){
+    $scope.timeline = TimelineService;
+    //TimelineService.get();
     }])
 })();

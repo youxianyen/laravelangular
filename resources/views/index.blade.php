@@ -48,17 +48,15 @@
 	<h1>最近动态</h1>
 	<div class="hr"></div>
 	<div class="item-set">
-		<div class="item">
+		<div ng-if="" ng-repeat="item in Timeline.data" class="item">
 			<div class="vote"></div>
 			<div class="feed-item-content">
-				<div class="content-act">猪八戒赞同了该回答</div>
-				<div class="title">哪个瞬间让你觉得读书很有用？</div>
-				<div class="content-owner">子墨子</div>
+				<div ng-if="item.question_id" class="content-act">[: item.user.username :]添加了回答</div>
+				<div ng-if="!item.question_id" class="content-act">[: item.user.username :]添加了提问</div>
+				<div class="title">[: item.title :]</div>
+				<div class="content-owner">[: item.user.username :]</div>
 				<div class="content-main">
-					(CNN)Santa Claus is coming to town -- or so about 85% of young American children believe.
-
-In interviews, 85% of 4-year-olds said that they believed in Santa, 65% of 6-year-olds said that they believed, and 25% of 8-year-olds said that they believed. Those numbers were published in a small study in the American Journal of Orthopsychiatry in 1978.
-But researchers say those percentages of young children who believe in jolly old Saint Nick seem to have remained steady over the years.
+					[: item.title :]
 				</div>
 				<div class="action-set">
 					<div class="comment">评论</div>

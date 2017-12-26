@@ -91,3 +91,10 @@ cd到public目录
 安装angular jquery angular-ui-router normalize-css
 npm install angular jquery angular-ui-router normalize-css
 
+
+
+
+
+
+
+php artisan make:controller CommonController
