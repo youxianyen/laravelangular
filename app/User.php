@@ -131,6 +131,7 @@ class User extends Model
         session()->forget('username');
         //删除user_id
         session()->forget('user_id');
+        
         return ['status' => 1];
         return redirect('/');
         //方法2
@@ -293,9 +294,15 @@ class User extends Model
         ->withTimestamps();      
     } 
 
+    //username exists
     public function exist()
     {
-        return suc(['count' => $this->where(rq())->count()]);
+        if (empty(rq('username')))
+            return err('username required');
+        $count = $this->where(['username' => rq('username')])->count();
+        if ($count)
+            return err('username has exists');
+        return suc();
     }
 
     public function phpinfo()

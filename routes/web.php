@@ -88,10 +88,12 @@ Route::any('api/user/reset_password', function(){
     return user_ins()->reset_password();
 });
 
-Route::any('api/user/exist', function(){
-    
+//用户名查重
+Route::any('api/user/exist', function () {
+
     return user_ins()->exist();
 });
+
 
 Route::any('api/user/validate_reset_password', function(){
     
@@ -189,4 +191,24 @@ Route::any('phpinfo', function(){
 
 Route::any('cal', function(){
     user_ins()->cal();
+});
+
+Route::get('tpl/page/home', function()
+{
+    return view('page.home');
+});
+
+Route::get('tpl/page/signup', function()
+{
+    return view('page.signup');
+});
+
+Route::get('tpl/page/login', function()
+{
+    return view('page.login');
+});
+
+Route::get('tpl/page/question_add', function()
+{
+    return view('page.question_add');
 });

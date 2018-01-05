@@ -3,28 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class CommonController extends Controller
 {
-    /*时间域API*/
-    public function timeline()
+    //
+    public function timeLine()
     {
-    	list($limit, $skip) = paginate(rq('page'), rq('limit'));
+        list($limit, $skip) = paginate(rq('page'), rq('limit'));
+        //获取问题
+        $questions = question_ins()
+            ->limit($limit)
+            ->skip($skip)
+            ->orderby('created_at', 'desc')
+            ->get();
 
-    	/*获取问题数据*/
-    	$question = question_ins()
-    	->with('user')
-    	->limit($limit)
-    	->skip($skip)
-    	->orderBy('create_at', 'desc')
-    	->get();
+        //获取回答
+        $answers = answer_ins()
+            ->limit($limit)
+            ->skip($skip)
+            ->orderby('created_at', 'desc')
+            ->get();
+        //合并
+        $data = $questions->merge($answers);
+        //排序
+        $data = $data->sortBy(function ($item) {
+            return $item->created_at;
+        });
 
-    	//获取回答数据
-    	$answer = answer_ins()
-    	->limit($limit)
-    	->skip($skip)
-    	->orderBy('create_at', 'desc')
-    	->get();
+        $data = $data->values()->all();
+        return ['status' => 200, 'data' => $data];
     }
 }

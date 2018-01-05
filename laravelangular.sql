@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-12-24 16:52:12
+-- Generation Time: 2018-01-05 11:35:18
 -- 服务器版本： 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -149,7 +149,9 @@ INSERT INTO `questions` (`id`, `title`, `desc`, `user_id`, `status`, `created_at
 (9, '猫猫发发发', '范德萨发啥的分段润肺', 1, 'ok', '2017-12-24 04:53:43', '2017-12-24 04:53:43'),
 (10, '地方发发发', '发', 1, 'ok', '2017-12-24 04:59:32', '2017-12-24 04:59:32'),
 (11, '房东发发发', '丰富的', 1, 'ok', '2017-12-24 05:02:02', '2017-12-24 05:02:02'),
-(12, '15404', 'sdcccgff', 1, 'ok', '2017-12-24 13:21:45', '2017-12-24 13:21:45');
+(12, '15404', 'sdcccgff', 1, 'ok', '2017-12-24 13:21:45', '2017-12-24 13:21:45'),
+(13, '发大财', '发发发发大财', 1, 'ok', '2018-01-03 01:22:56', '2018-01-03 01:22:56'),
+(14, '中等发达', '法人', 1, 'ok', '2018-01-05 10:34:32', '2018-01-05 10:34:32');
 
 -- --------------------------------------------------------
 
@@ -262,7 +264,7 @@ ALTER TABLE `migrations`
 -- 使用表AUTO_INCREMENT `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- 使用表AUTO_INCREMENT `users`

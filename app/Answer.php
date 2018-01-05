@@ -92,7 +92,10 @@ class Answer extends Model
         if (rq('id')) 
         {
             //查看单个回答
-            $answer = $this->find(rq('id'));
+            $answer = $this
+              ->with('user')
+              ->with('users')
+              ->find(rq('id'));
             if (!$answer) 
             {
                 return ['status' => 0, 'msg' => 'answer not exists'];
