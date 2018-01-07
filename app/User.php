@@ -67,11 +67,20 @@ class User extends Model
             return err('required id');
         }
 
+        if (rq('id') === 'self') 
+        {
+            if (!$this->is_logged_in())            
+                return err('login required');
+            $id = session('user_id');            
+        }
+        else 
+            $id = rq('id');        
+
         $get = ['id', 'username', 'avatar_url', 'intro'];
             //$this->get($get);
         $user = $this->find(rq('id'), $get);
         $data = $user->toArray();
-        $answer_count = answer_ins()->where('user_id', rq('id'))->count();
+        $answer_count = answer_ins()->where('user_id', $id)->count();
         $question_count = question_ins()->where('user_id', rq('id'))->count();
         $data['answer_count'] = $answer_count;
         $data['question_count'] = $question_count;
@@ -131,7 +140,6 @@ class User extends Model
         session()->forget('username');
         //删除user_id
         session()->forget('user_id');
-        
         return ['status' => 1];
         return redirect('/');
         //方法2

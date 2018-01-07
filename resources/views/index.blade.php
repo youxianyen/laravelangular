@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" ng-app="xiaohu">
+<html lang="zh" ng-app="xiaohu" user-id="{{session('user_id')}}">
 <head>
 	<meta charset="utf-8">
 	<title>晓乎</title>

@@ -14,27 +14,28 @@
                 *如果是问题将会跳过统计
                 * */
                 me.count_vote = function (answers) {
-
+                    /*迭代所有的数据*/
                     for(var i = 0;i<answers.length;i++){
                         var votes, item = answers[i];
-
+                        /*如果不是回答也么有users元素说明本条不是回答或
+                        **回答没有任何票数*/
                         if(!item['question_id'])
                             continue;
+
                         me.data[item.id] = item;
+
                         if(!item['users'])
                             continue;
+
+                        /*每条回答的默认赞同票和反对票对为零*/
                         item.upvote_count = 0;
                         item.downvote_count = 0;
 
-                        /*users是所有投票用户的用户信息*/
+                        /*users 是所有投票用户的用户信息*/
                         votes = item['users'];
                         if(votes){
-                            for(var j=0;j<votes.length;j++){
+                            for(var j=0; j<votes.length; j++){
                                 var v = votes[j];
-                                /*
-                                **获取pivot元素中的用户投票信息，如果是1增加1赞同票
-                                **如果是2增加1反对票
-                                */
                                 if(v['pivot'].vote === 1){
                                     item.upvote_count++;
                                 }
@@ -54,24 +55,24 @@
                     }
 
                     var answer = me.data[conf.id];
-                    var users = answer.users;
-                    for(var i =0;i<users.length;i++){
-                        if(users[i].id == his.id && conf.vote == users[i].pivot.vote){
+                    var users = answer.users || [];
+                    /*判断当前用户是否已经投过相同的票*/
+                    for(var i = 0; i < users.length; i++)
+                    {
+                        if(users[i].id == his.id && conf.vote == users[i].pivot.vote)
                             conf.vote = 3;
-                        }
                     }
 
-                    return $http.post('/api/answer/vote',conf)
+                    return $http.post('api/answer/vote',conf)
                         .then(function (r) {
-                            console.log('eee');
                             if(r.data.status){
                                 console.log(r.data.status);
                                 return true;
                             }
                             console.log(r.data.status);
                             return false;
-                        }, function (e) {
-                            console.log('e',e);
+                        }, function () {
+                            console.log('api/answer/vote error');
                             return false;
                         })
                 }
@@ -87,6 +88,18 @@
                     //if(angular.isArray(input)){
                     //    var id_set = input;
                     //}
+                }
+
+                me.read = function (params)
+                {
+                    return $http.post('/api/answer/read', params)
+                      .then(
+                        function (r)
+                      {
+                        if (r.data.status)                         
+                            me.data = angular.merge({}, me.data, r.data.data);
+                        return r.data.data;                        
+                      })
                 }
             }
         ])

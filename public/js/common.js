@@ -62,7 +62,7 @@
                 var $win;
                 $scope.Timeline = TimelineService;
                 TimelineService.get();
-                
+
                 $win = $(window);
                 $win.on('scroll', function () {
                     if($win.scrollTop() - ($(document).height() - $win.height()) > -30){
@@ -74,6 +74,7 @@
                     return AnswerService.data;
                 }, function (new_data,old_data) {
                     var timeline_data = TimelineService.data;
+                    
                     for(var k in new_data)
                     {
                         /*更新时间线中的回答数据*/

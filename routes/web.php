@@ -212,3 +212,8 @@ Route::get('tpl/page/question_add', function()
 {
     return view('page.question_add');
 });
+
+Route::get('tpl/page/user', function()
+{
+    return view('page.user');
+});

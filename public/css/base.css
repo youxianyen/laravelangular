@@ -19,6 +19,12 @@ body {
 }
 h1 {
 	font-size: 10px;
+
+}
+h2 {
+	font-size: 16px;
+}
+.h1, h2 {
 	margin-top: 0;
 }
 .fl {
@@ -226,9 +232,10 @@ textarea {
     font-size: 14px;
 }
 .form h1,
-.home h1, 
+h1, h2,
 .feed-item-content .content-act, 
-.feed-item-content .content-owner .desc {
+.feed-item-content .content-owner .desc 
+.action-set {
     color: #666;
 }
 .feed-item-content .action-set {
@@ -270,4 +277,17 @@ button[disable] {
 	background: #eee;
 	color: #aaa;
 }
-
+.info_item > *:first-child {
+	float: right;
+	width: 20%;
+}
+.info_item > *:last-child {
+	width: 80%;
+	float: left;
+}
+.info_item > * {
+	margin-bottom: 5px;
+}
+.user.container .title{
+    font-weight: 700;
+}

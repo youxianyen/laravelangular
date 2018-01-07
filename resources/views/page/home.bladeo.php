@@ -4,8 +4,8 @@
 	<div class="item-set">
 		<div ng-repeat="item in Timeline.data" class="feed item clearfix">
 			<div ng-if="item.question_id" class="vote">
-				<div ng-click="Timeline.vote({id: item.id, vote: 1})" class="up">赞 [: item.upvote_count :]</div>
-				<div ng-click="Timeline.vote({id: item.id, vote: 2})" class="down">踩 [: item.downvote_count :]</div>
+				<div ng-click="Answer.vote({id: item.id, vote: 1})" class="up">赞 [: item.upvote_count :]</div>
+				<div ng-click="Answer.vote({id: item.id, vote: 2})" class="down">踩 [: item.downvote_count :]</div>
 				
 			</div>
 			<div class="feed-item-content">
@@ -14,7 +14,7 @@
 				<div class="title">[: item.title :]</div>
 				<div class="content-owner">[: item.user.username :]
 					<span class="desc">
-						[: item.desc :]
+						[: item.user.username :]
                     </span>
 				</div>
 				<div class="content-main">

@@ -1,5 +1,10 @@
 ;(function(){
 	'use strict';
+
+    window.his = {
+        id: parseInt($('html').attr('user-id'))
+    }
+    console.log('his', his);
 	
 	angular.module('xiaohu', [
     'ui.router',
@@ -42,6 +47,10 @@
          .state('question.add', {
             url: '/add',
             templateUrl: '/tpl/page/question_add'
+         })
+         .state('user', {
+            url: '/user/:id',
+            templateUrl: '/tpl/page/user'
          })
     }])
 

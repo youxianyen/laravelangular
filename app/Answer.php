@@ -80,13 +80,39 @@ class Answer extends Model
 
     }
 
+    public function read_by_user_id($user_id)
+    {
+        $user = user_ins()->find($user_id);
+        if (!$user) 
+        {
+            return err('user not exists');
+        }
+
+        $r = $this
+          ->with('question')
+          ->where('user_id', $user_id)
+          ->get()
+          ->keyBy('id');
+
+        return suc($r->toArray());
+    }
+
     //1.查看回答问题api
     public function read()
     {   
 
-        if (!rq('id') && !rq('question_id')) 
+        if (!rq('id') && !rq('question_id') && !rq('user_id')) 
         {
             return ['status' => 0, 'msg' => 'id or question_id is required'];
+        }
+
+        if (rq('user_id')) 
+        {            
+            $user_id = rq('user_id') === 'self' ? 
+              session('user_id') :  
+              rq('user_id');
+            
+            return $this->read_by_user_id($user_id);
         }
 
         if (rq('id')) 
@@ -174,8 +200,12 @@ class Answer extends Model
             return ['status' => 0, 'msg' => 'answer not exists'];
         }
 
-        //1.赞成 2.反对
-        $vote = rq('vote') <= 1 ? 1 : 2;
+        /*1.赞成 2.反对 3.清空    */
+        $vote = rq('vote');
+        if ($vote != 1 && $vote !=2 && $vote != 3) 
+        {
+            return ['status' => 0, 'msg' => 'invalid vote'];
+        }
 
         //检查此用户是否在相同问题下投过票,如果投过票就删除投票
         $answer->users()
@@ -183,6 +213,11 @@ class Answer extends Model
         ->where('user_id', session('user_id'))
         ->where('answer_id', rq('id'))
         ->delete();
+
+        if ($vote == 3) 
+        {
+            return ['status' => 1];
+        }
 
         //在连接表中增加数据  
         $answer
@@ -195,16 +230,22 @@ class Answer extends Model
     public function user()
     {
         return $this
-        ->belongsToMany('App\User');
+          ->belongsTo('App\User');
+        //->belongsToMany('App\User');
         
     }
 
     public function users()
     {
         return $this
-        ->belongsToMany('App\User')
-        ->withPivot('vote')
-        ->withTimestamps();   
+          ->belongsToMany('App\User')
+          ->withPivot('vote')
+          ->withTimestamps();   
+    }
+
+    public function question()
+    {
+        return $this->belongsTo('App\Question');
     }
 }
 
